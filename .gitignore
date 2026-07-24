@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Xcode user state
+xcuserdata/
+*.xcuserstate
+*.xcuserdatad
+
+# Xcode build
+build/
+DerivedData/
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# WorkBuddy local memory
+.workbuddy/
+
+# Trae local docs
+.trae/
