@@ -11,6 +11,8 @@ struct StatisticsView: View {
 
     @State private var isPresentingFilter = false
 
+    @AppStorage("currencyCode") private var currencyCode = "CNY"
+
     init(
         filterStart: Binding<Date?>,
         filterEnd: Binding<Date?>,
@@ -65,7 +67,7 @@ struct StatisticsView: View {
                     HStack {
                         Text("总支出")
                         Spacer()
-                        Text(MoneyFormat.currencyString(for: totalAmount))
+                        Text(MoneyFormat.currencyString(for: totalAmount, currencyCode: currencyCode))
                             .font(.body.monospacedDigit())
                     }
                 }
@@ -75,7 +77,7 @@ struct StatisticsView: View {
                         HStack {
                             Text(category.rawValue)
                             Spacer()
-                            Text(MoneyFormat.currencyString(for: total))
+                            Text(MoneyFormat.currencyString(for: total, currencyCode: currencyCode))
                                 .font(.body.monospacedDigit())
                                 .foregroundStyle(total == 0 ? .secondary : .primary)
                         }
@@ -93,7 +95,7 @@ struct StatisticsView: View {
                                     Text(transaction.title)
                                         .lineLimit(1)
                                     Spacer(minLength: 12)
-                                    Text(MoneyFormat.currencyString(for: transaction.amount))
+                                    Text(MoneyFormat.currencyString(for: transaction.amount, currencyCode: currencyCode))
                                         .font(.body.monospacedDigit())
                                 }
 

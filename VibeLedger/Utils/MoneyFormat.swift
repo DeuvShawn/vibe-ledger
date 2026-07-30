@@ -19,12 +19,24 @@ enum MoneyFormat {
         return Decimal(string: normalized, locale: Locale(identifier: "en_US_POSIX"))
     }
 
-    static func currencyString(for value: Decimal) -> String {
+    static func currencyString(for value: Decimal, currencyCode: String = "CNY") -> String {
+        let symbol: String
+        let localeID: String
+
+        switch currencyCode {
+        case "USD":
+            symbol = "$"
+            localeID = "en_US"
+        default:
+            symbol = "¥"
+            localeID = "zh_CN"
+        }
+
         let formatter = NumberFormatter()
         formatter.numberStyle = .currency
-        formatter.locale = Locale(identifier: "zh_CN")
-        formatter.currencyCode = "CNY"
-        formatter.currencySymbol = "¥"
+        formatter.locale = Locale(identifier: localeID)
+        formatter.currencyCode = currencyCode
+        formatter.currencySymbol = symbol
         formatter.maximumFractionDigits = 2
         formatter.minimumFractionDigits = 2
 

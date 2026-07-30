@@ -8,5 +8,6 @@ struct VibeLedgerApp: App {
             MainTabView()
         }
         .modelContainer(for: Transaction.self)
+        .defaultSize(width: 820, height: 1100)
     }
 }

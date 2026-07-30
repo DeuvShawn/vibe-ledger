@@ -18,6 +18,8 @@ struct LedgerListView: View {
     @State private var isShowingAlert = false
     @State private var isShowingDeleteAllConfirmation = false
 
+    @AppStorage("currencyCode") private var currencyCode = "CNY"
+
     @Binding private var filterStart: Date?
     @Binding private var filterEnd: Date?
     @Binding private var selectedCategories: Set<TransactionCategory>
@@ -59,7 +61,7 @@ struct LedgerListView: View {
                     SummaryHeader(
                         rangeLabel: DateRange.label(start: filterStart, end: filterEnd),
                         count: filteredTransactions.count,
-                        total: MoneyFormat.currencyString(for: totalAmount)
+                        total: MoneyFormat.currencyString(for: totalAmount, currencyCode: currencyCode)
                     )
                 }
             }
@@ -84,6 +86,12 @@ struct LedgerListView: View {
                             isImporting = true
                         } label: {
                             Label("导入账本", systemImage: "square.and.arrow.down")
+                        }
+
+                        Button {
+                            currencyCode = (currencyCode == "CNY" ? "USD" : "CNY")
+                        } label: {
+                            Label("货币符号：\(currencyCode == "CNY" ? "¥" : "$")", systemImage: "dollarsign.circle")
                         }
 
                         Divider()
@@ -242,6 +250,8 @@ private struct ImportResult {
 private struct TransactionRow: View {
     let transaction: Transaction
 
+    @AppStorage("currencyCode") private var currencyCode = "CNY"
+
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 8) {
@@ -264,7 +274,7 @@ private struct TransactionRow: View {
 
                 Spacer(minLength: 12)
 
-                Text(MoneyFormat.currencyString(for: transaction.amount))
+                Text(MoneyFormat.currencyString(for: transaction.amount, currencyCode: currencyCode))
                     .font(.body.monospacedDigit())
             }
 

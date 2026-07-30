@@ -8,6 +8,8 @@ struct SearchView: View {
     @State private var searchText = ""
     @State private var selectedTransactionForEdit: Transaction?
 
+    @AppStorage("currencyCode") private var currencyCode = "CNY"
+
     private var matchedTransactions: [Transaction] {
         let keyword = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !keyword.isEmpty else { return transactions }
@@ -15,7 +17,7 @@ struct SearchView: View {
         let normalizedKeyword = normalizedSearchToken(keyword)
 
         return transactions.filter { transaction in
-            let formattedAmount = MoneyFormat.currencyString(for: transaction.amount)
+            let formattedAmount = MoneyFormat.currencyString(for: transaction.amount, currencyCode: currencyCode)
             let rawAmount = NSDecimalNumber(decimal: transaction.amount).stringValue
 
             return transaction.title.localizedCaseInsensitiveContains(keyword) ||
@@ -70,6 +72,8 @@ private func normalizedSearchToken(_ text: String) -> String {
 private struct SearchTransactionRow: View {
     let transaction: Transaction
 
+    @AppStorage("currencyCode") private var currencyCode = "CNY"
+
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: 8) {
@@ -91,7 +95,7 @@ private struct SearchTransactionRow: View {
 
                 Spacer(minLength: 12)
 
-                Text(MoneyFormat.currencyString(for: transaction.amount))
+                Text(MoneyFormat.currencyString(for: transaction.amount, currencyCode: currencyCode))
                     .font(.body.monospacedDigit())
             }
 

@@ -361,7 +361,7 @@ private var matched: [Transaction] {
 
 **MoneyFormat.swift** — 金额统一处理：
 - `parseDecimal(_:)` —— 解析输入，兼容中文标点，用 `Locale(identifier: "en_US_POSIX")` 避免本地化污染
-- `currencyString(for:)` —— 显示，固定 `zh_CN` / `¥` / 两位小数
+- `currencyString(for:currencyCode:)` —— 显示，`currencyCode` 默认 `"CNY"`（`zh_CN`/`¥`）；传 `"USD"` 则 `en_US`/`$`；固定两位小数。货币选择用 `@AppStorage("currencyCode")` 持久化，主页 `...` 菜单内可切换，各页读取后全局生效
 
 **<Entity>TransferDocument.swift** — `FileDocument` 封装导入导出：
 ```swift
