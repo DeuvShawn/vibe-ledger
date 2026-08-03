@@ -26,6 +26,20 @@
 - 时间与分类筛选可叠加使用；「清除筛选」一键重置全部条件
 - 筛选状态在主页与统计页之间实时同步
 
+## 界面预览
+
+### iPhone
+
+| 主页 | 统计 | 搜索 |
+|------|------|------|
+| ![iPhone 主页](Screenshots/iphone-homepage.png) | ![iPhone 统计](Screenshots/iphone-statistics.png) | ![iPhone 搜索](Screenshots/iphone-search.png) |
+
+### iPad
+
+| 主页 | 统计 | 搜索 |
+|------|------|------|
+| ![iPad 主页](Screenshots/ipad-homepage.png) | ![iPad 统计](Screenshots/ipad-statistics.png) | ![iPad 搜索](Screenshots/ipad-search.png) |
+
 ## 技术栈
 
 | 项目 | 说明 |
